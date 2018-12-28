@@ -1,13 +1,17 @@
 /***
 * Name: NewModel
 * Author: guadalupebabio
-* Description: Square matrix and agent moving in cells
-* Tags: square
+* Description: Try to draw a line
+* Tags: 
 ***/
 
 model NewModel
 
 global {
+	init{
+  	create road number:1;
+	} 
+	
 	//Number of agents to create
 	geometry var1 <- polyline([{0,0}, {0,10}, {10,10}, {10,0}],0.2); // var1 equals a poly
 	geometry var0 <- polyline([{0,0}, {0,10}, {10,10}, {10,0}]); // var0 equals a polyline
