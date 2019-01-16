@@ -37,7 +37,7 @@ experiment test type: gui {
 	
 	output {
 		display View1 {
-		species road aspect: base_road;	
+		 	
 		}
 	}
 }

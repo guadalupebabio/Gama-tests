@@ -60,19 +60,13 @@ global {
 species road {
 	rgb color<- rgb(0,0,225);
 	aspect base_road{
-		draw polyline([{size_square*0*2 + size_square,size_square}, {size_square*0*2 + size_square,size_square*5*2 + size_square}]) color:color; 
-		draw polyline([{size_square*1*2 + size_square,size_square}, {size_square*1*2 + size_square,size_square*5*2 + size_square}]) color:color;
-		draw polyline([{size_square*2*2 + size_square,size_square}, {size_square*2*2 + size_square,size_square*5*2 + size_square}]) color:color;
-		draw polyline([{size_square*3*2 + size_square,size_square}, {size_square*3*2 + size_square,size_square*5*2 + size_square}]) color:color;
-		draw polyline([{size_square*4*2 + size_square,size_square}, {size_square*4*2 + size_square,size_square*5*2 + size_square}]) color:color;
-		draw polyline([{size_square*5*2 + size_square,size_square}, {size_square*5*2 + size_square,size_square*5*2 + size_square}]) color:color;
+		loop i from:0 to:grid_size-1{
+			draw polyline([{size_square*i*2 + size_square,size_square}, {size_square*i*2 + size_square,size_square*5*2 + size_square}]) color:color; 
+		} 
+		loop i from:0 to:grid_size-1{
+			draw polyline([{size_square,size_square*i*2 + size_square}, {size_square*5*2 + size_square,size_square*i*2 + size_square}]) color:color; 
+		}
 		
-		draw polyline([{size_square,size_square*0*2 + size_square}, {size_square*5*2 + size_square,size_square*0*2 + size_square}]) color:color;
-		draw polyline([{size_square,size_square*1*2 + size_square}, {size_square*5*2 + size_square,size_square*1*2 + size_square}]) color:color;
-		draw polyline([{size_square,size_square*2*2 + size_square}, {size_square*5*2 + size_square,size_square*2*2 + size_square}]) color:color;
-		draw polyline([{size_square,size_square*3*2 + size_square}, {size_square*5*2 + size_square,size_square*3*2 + size_square}]) color:color;
-		draw polyline([{size_square,size_square*4*2 + size_square}, {size_square*5*2 + size_square,size_square*4*2 + size_square}]) color:color;
-		draw polyline([{size_square,size_square*5*2 + size_square}, {size_square*5*2 + size_square,size_square*5*2 + size_square}]) color:color; 
 	}
 }
 
