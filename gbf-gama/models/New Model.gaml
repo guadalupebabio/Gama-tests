@@ -27,15 +27,6 @@ global {
 	//Size of the agent
 	int size_agent <- 1000 ;
 	
-	// How I imagine if I can draw lines
-	init {
-	  		create road number:12;  //if I cange the number nothing happens
-			//loop q from:0 to:grid_size-1{
-			//	locationlines <- {size_square*q*2 + size_square,0}; //considering location <- {starting,ending} for the ones in vertical
-		      //      //location <- {size_square*i*2 + size_square + grid_size*size_square ,size_square*i*2 + size_square  }; //considering location <- {starting,ending} for the ones in horizontal
-				//}	
-	}
-	
 	/***
 	init { 
 			//positions depending of the number of cells		
