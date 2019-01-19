@@ -13,30 +13,27 @@ global {
 	
 	//Size of the square
 	int size_square <- 1000 ;
+	int size_people <- size_square/10;
 	init { 
-			//positions depending of the number of cells
-			loop i from:0 to:grid_size-1{
-				loop u from:0 to:grid_size-1{
-					//Creation of the cell 
-					create cell number: grid_size*grid_size{ 
-						location <- {size_square*i*2 + size_square, size_square*u*2 + size_square}; 
-				    }
-				}
-			}  
+		create road number:grid_size*2;
+	    create people number:1{
+			speed <- 5.0 # km / # h;
+			//location <- any_location_in(one_of(cell)); 
+			location <- {0,0};
+		}
+		ask people{ //what makes the ask people? R:
+			myTarget<-any_location_in(one_of(cell)); 
+		}
+		//positions depending of the number of cells
+		loop i from:0 to:grid_size-1{
+			loop u from:0 to:grid_size-1{
+				//Creation of the cell 
+				create cell number: grid_size*grid_size{ 
+					location <- {size_square*i*2 + size_square, size_square*u*2 + size_square}; 
+			    }
+			}
+		}  
 	}
-	//Size of the agent
-	int size_agent <- 1000 ;
-	
-	/***
-	init { 
-			//positions depending of the number of cells		
-			//Creation of the cell 
-			create people number: 1{ 
-			location <- {0, 0}; 
-			}  
-	}
-	***/
-	
 	
 	//SPATIAL PARAMETERS  
 	float environment_height <- (grid_size + 1) * size_square * 2;
@@ -61,36 +58,22 @@ species road {
 	}
 }
 
- /***
-species people{
-	vegetation_cell myCell <- one_of (vegetation_cell) ; 
-		
-	init { 
-		location <- myCell.location;
-	}
-		
-	reflex basic_move { 
-		myCell <- one_of (myCell.neighbours) ;
-		location <- myCell.location ;
+species people skills:[moving]{
+	point myTarget; // I HAVE REMOVE THE <-nil as you have in the Urbam 3D
+	reflex move{
+	  	do goto target:myTarget speed:0.1; //The agent should move to any location in one of the cells but it's not moving, why? R:
 	}
 	aspect base{
-		draw circle(size_agent) color:#blue;
+		draw circle(size_people) color:#blue;
 	}
 }
-***/
+
 
 species cell {                      
   aspect default {
-    draw cube(size_square) color:#red;   
+    draw cube(size_square) color:#red border:#grey empty:false;   
   }
 }
-
- 
-grid vegetation_cell width: 50 height: 50 neighbors: 4{
-	rgb color <- rgb(255, 255, 255);
-	list<vegetation_cell> neighbours  <- (self neighbors_at 2);
-}
-
 
 
 experiment NewModel type: gui {
@@ -98,10 +81,9 @@ experiment NewModel type: gui {
 	parameter "Size of the square:" var: size_square  min: 10 max: 3000;
 	output {
 	   display View1 synchronized:true background:blackMirror ? #black :#white toolbar:false type:opengl draw_env:false {
-		   species cell;
+		   species cell transparency:0.9; //Why the transparency it's not applyed? R:
 		   species road aspect: base_road;
-		   //species people aspect: base;
-		   //grid vegetation_cell lines: #black ;
+		   species people aspect: base;
 		   //pressing letter "w" change the background color
 		   event["w"] action: {blackMirror<-!blackMirror;};
 	   }
