@@ -14,16 +14,9 @@ global {
 	//Size of the square
 	int size_square <- 1000 ;
 	int size_people <- size_square/10;
-	init { 
+	init{ 
 		create road number:grid_size*2;
-	    create people number:1{
-			speed <- 5.0 # km / # h;
-			//location <- any_location_in(one_of(cell)); 
-			location <- {0,0};
-		}
-		ask people{ //what makes the ask people? R:
-			myTarget<-any_location_in(one_of(cell)); 
-		}
+	    
 		//positions depending of the number of cells
 		loop i from:0 to:grid_size-1{
 			loop u from:0 to:grid_size-1{
@@ -33,11 +26,20 @@ global {
 			    }
 			}
 		}  
+		create people number:6{
+			speed <- 5.0 # km / # h; 
+			location <- any_location_in(one_of(cell));
+		}
+		
+		//ask people{ //what makes the ask people? R:
+		//	myTarget<-any_location_in(one_of(cell)); 
+		//}
+		
 	}
 	
-	//SPATIAL PARAMETERS  
-	float environment_height <- (grid_size + 1) * size_square * 2;
-	float environment_width <- environment_height;
+	//SPATIAL PARAMETERS
+	int environment_height <- (grid_size + 1) * size_square * 2;
+	int environment_width <- environment_height;
 	bool blackMirror parameter: 'Dark Room' category: 'Aspect' <- true;
 	
 	//geometry shape <- envelope(x,y); 
@@ -59,14 +61,15 @@ species road {
 }
 
 species people skills:[moving]{
-	point myTarget; // I HAVE REMOVE THE <-nil as you have in the Urbam 3D
+	//point myTarget; // I HAVE REMOVE THE <-nil as you have in the Urbam 3D
+	point myTarget <- nil;
 	reflex move{
-	  	do goto target:myTarget speed:0.1; //The agent should move to any location in one of the cells but it's not moving, why? R:
+	  	do goto target:{0,0} speed:0.1; //The agent should move to any location in one of the cells but it's not moving, why? R:
 	}
 	aspect base{
 		draw circle(size_people) color:#blue;
 	}
-}
+} //The agent doesnt move in the simulation  and I am doing the same as test.gaml R:
 
 
 species cell {                      
@@ -81,7 +84,7 @@ experiment NewModel type: gui {
 	parameter "Size of the square:" var: size_square  min: 10 max: 3000;
 	output {
 	   display View1 synchronized:true background:blackMirror ? #black :#white toolbar:false type:opengl draw_env:false {
-		   species cell transparency:0.9; //Why the transparency it's not applyed? R:
+		   //species cell transparency:0.9; //Why the transparency it's not applyed? R:
 		   species road aspect: base_road;
 		   species people aspect: base;
 		   //pressing letter "w" change the background color
