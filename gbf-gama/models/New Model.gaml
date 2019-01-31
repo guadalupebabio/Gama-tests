@@ -4,7 +4,10 @@
 * Description: Square matrix and agent moving in cells
 * Tags: square
 ***/
-
+/***
+ * 29 Jan
+ * Agents don't move
+ ***/
 model NewModel
 
 global {
@@ -84,7 +87,7 @@ experiment NewModel type: gui {
 	parameter "Size of the square:" var: size_square  min: 10 max: 3000;
 	output {
 	   display View1 synchronized:true background:blackMirror ? #black :#white toolbar:false type:opengl draw_env:false {
-		   //species cell transparency:0.9; //Why the transparency it's not applyed? R:
+		   species cell transparency:0.9; //Why the transparency it's not applyed? R:
 		   species road aspect: base_road;
 		   species people aspect: base;
 		   //pressing letter "w" change the background color
