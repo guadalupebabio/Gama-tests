@@ -2,7 +2,7 @@
 * Name: NewModel
 * Author: guadalupebabio
 * Description: Square matrix and agent moving in cells
-* Tags: square
+* Tags: square, csv load
 ***/
 
 model NewModel
