@@ -39,6 +39,7 @@ species people skills:[moving]{
 	point myTarget;
 	reflex move{
 	  	do goto target:myTarget on: road_network speed:0.1;
+	  	
 	}
 
 	//reflex move{
@@ -72,11 +73,11 @@ species cell_live {
 
 experiment test type: gui {
 	output {
-		display View1 type:opengl background:#white{
-		 	species cell_live; //transparency:0.90; //Even with transparency doesn't allow me to see the agent inside it
-		 	species cell_work transparency:0.95;
+		display Assignuses type:opengl background:#white{
+		 	species cell_live aspect:default_live; //transparency:0.90; //Even with transparency doesn't allow me to see the agent inside it
+		 	species cell_work aspect:default_work;// transparency:0.95;
 		 	species road aspect: base_road;
-		 	species people aspect:base;
+		 	//species people aspect:base;
 		}
 	}
 }

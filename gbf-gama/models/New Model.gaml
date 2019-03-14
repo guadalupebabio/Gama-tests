@@ -1,7 +1,7 @@
 /***
 * Name: NewModel
 * Author: guadalupebabio
-* Description: Square matrix and agent moving in cells
+* Description: Square matrix  with asign uses. 
 * Tags: square
 ***/
 /***
@@ -16,9 +16,11 @@ global {
 	
 	//Size of the square
 	int size_square <- 1000 ;
-	int size_people <- size_square/10;
+	float size_people <- size_square/10;
+	graph the_graph;
 	init{ 
 		create road number:grid_size*2;
+	    the_graph <- as_edge_graph(road);
 	    
 		//positions depending of the number of cells
 		loop i from:0 to:grid_size-1{
@@ -47,6 +49,8 @@ global {
 	
 	//geometry shape <- envelope(x,y); 
 	geometry shape <- rectangle(environment_width, environment_height); 
+	
+	//import csv
 }
 
 
@@ -64,10 +68,9 @@ species road {
 }
 
 species people skills:[moving]{
-	//point myTarget; // I HAVE REMOVE THE <-nil as you have in the Urbam 3D
-	point myTarget <- nil;
+	point myTarget;
 	reflex move{
-	  	do goto target:{0,0} speed:0.1; //The agent should move to any location in one of the cells but it's not moving, why? R:
+	  	do goto target:myTarget speed:0.1 on: the_graph; //The agent should move to any location in one of the cells but it's not moving, why? R:
 	}
 	aspect base{
 		draw circle(size_people) color:#blue;
@@ -77,7 +80,7 @@ species people skills:[moving]{
 
 species cell {                      
   aspect default {
-    draw cube(size_square) color:#red border:#grey empty:false;   
+    draw square(size_square) color:#red border:#grey empty:false;   
   }
 }
 
@@ -86,12 +89,14 @@ experiment NewModel type: gui {
 	
 	parameter "Size of the square:" var: size_square  min: 10 max: 3000;
 	output {
-	   display View1 synchronized:true background:blackMirror ? #black :#white toolbar:false type:opengl draw_env:false {
-		   species cell transparency:0.9; //Why the transparency it's not applyed? R:
+	   display NewModel synchronized:true background:blackMirror ? #black :#white toolbar:false type:opengl draw_env:false {
+		   //Why the transparency it's not applyed? R:
+		   species cell transparency:0.6; 
 		   species road aspect: base_road;
 		   species people aspect: base;
 		   //pressing letter "w" change the background color
 		   event["w"] action: {blackMirror<-!blackMirror;};
+		   
 	   }
 	}
 }
