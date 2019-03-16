@@ -38,7 +38,8 @@ global {
 species people skills:[moving]{
 	point myTarget;
 	reflex move{
-	  	do goto target:myTarget on: road_network speed:0.1;
+		do goto target:myTarget speed:0.1;
+	  	//do goto target:myTarget on: road_network speed:0.1; //if i give a road network it doesnt move
 	  	
 	}
 

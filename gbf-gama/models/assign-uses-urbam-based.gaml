@@ -102,10 +102,10 @@ global{
 			objective <- "resting"; ///m03
 			location <- any_location_in (living_place); ///m03
 		}
-		/*** 
+		 
 		ask people{
 			myTarget <- any_location_in (working_place);
-		}	*/	
+		}	
 	
 	}
 	
@@ -143,7 +143,8 @@ species people skills:[moving]{
 	int end_work  ;  ///m03
 	string objective ; 
 	//point myTarget; // I HAVE REMOVE THE <-nil as you have in the Urbam 3D
-	point myTarget <- nil;
+	//point myTarget <- nil;
+	/*** 
 	reflex time_to_work when: current_hour = start_work and objective = "resting"{
 		objective <- "working" ;
 		myTarget <- any_location_in (working_place);
@@ -160,12 +161,20 @@ species people skills:[moving]{
 			myTarget <- nil ;
 		}
 	}
+	*/
+	
 	/*** 
 	reflex move{
 		myTarget <- any_location_in (working_place); ///m03
 		do goto target:myTarget speed:0.1 on: the_graph;
 	  	//do goto target:{0,0} speed:0.1; //The agent should move to any location in one of the cells but it's not moving, why? R:
 	}*/
+	point myTarget;
+	reflex move{
+		do goto target:myTarget speed:0.1;
+	  	//do goto target:myTarget on: road_network speed:0.1; //if i give a road network it doesnt move
+	  	
+	}
 	aspect base{
 		draw circle(size_people) color:color;
 	}
