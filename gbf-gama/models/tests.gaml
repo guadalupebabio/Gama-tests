@@ -74,10 +74,10 @@ species cell_live {
 experiment test type: gui {
 	output {
 		display Assignuses type:opengl background:#white{
-		 	species cell_live aspect:default_live; //transparency:0.90; //Even with transparency doesn't allow me to see the agent inside it
-		 	species cell_work aspect:default_work;// transparency:0.95;
+		 	//species cell_live aspect:default_live; //transparency:0.90; //Even with transparency doesn't allow me to see the agent inside it
+		 	//species cell_work aspect:default_work;// transparency:0.95;
 		 	species road aspect: base_road;
-		 	//species people aspect:base;
+		 	species people aspect:base;
 		}
 	}
 }
